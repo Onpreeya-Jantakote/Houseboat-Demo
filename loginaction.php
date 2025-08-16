@@ -1,4 +1,5 @@
 <?php
+session_start();
 require 'server.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -14,13 +15,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows > 0) {
         $data = $result->fetch_assoc();
 
-        // Set user-related information in the session
+        // เก็บข้อมูลผู้ใช้ใน Session
         $_SESSION['cus_user'] = $data['cus_user'];
         $_SESSION['cus_tel'] = $data['cus_tel'];
         $_SESSION['cus_name'] = $data['cus_name'];
+        $_SESSION['cus_email'] = $data['cus_email'];
         $_SESSION['logged_in'] = true;
 
-        // Redirect to the home page or any other desired page
+        // ทำสิ่งที่คุณต้องการหลังจาก login เช่น redirect หน้าไปหน้า home.php
         header("Location: home.php");
         exit();
     } else {
@@ -32,3 +34,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->close();
 }
 ?>
+

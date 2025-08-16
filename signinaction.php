@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'kanit', sans-serif;
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;

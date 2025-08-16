@@ -1,10 +1,3 @@
-<?php 
-session_start();
-if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    header("Location: login.php"); 
-    exit;
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,31 +49,29 @@ if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light bg-white px-lg-3 py-lg-2 shadow-sm sticky-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="home.php"><img src="imges/logo/logo.png" alt="logo" width="40"></a>
+        <a class="navbar-brand" href="index.php"><img src="imges/logo/logo.png" alt="logo" width="40"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item me-2">
-                <a class="nav-link active" href="home.php">หน้าหลัก</a>
+                <a class="nav-link active" href="index.php">หน้าหลัก</a>
             </li>
             <li class="nav-item me-2">
-                <a class="nav-link" href="roomcus.php">ห้องพัก</a>
+                <a class="nav-link" href="rooms.php">ห้องพัก</a>
             </li>
             <li class="nav-item me-2">
-                <a class="nav-link" href="activitycus.php">กิจกรรม</a>
+                <a class="nav-link" href="activity.php">กิจกรรม</a>
             </li>
             <li class="nav-item me-2">
-                <a class="nav-link" href="cusbooking.php">การจอง</a>
-            </li>
-            <li class="nav-item me-2">
-                <a class="nav-link" href="menu.php">เมนู</a>
+                <a class="nav-link" href="anonybooking.php">การจอง</a>
             </li>
         </ul>
         <div class="d-flex">
-            <a class="navbar-brand" href="showdetail.php"><img src="imges/logo/user.png" alt="logo" width="30"></a>
-            <a href="logout.php" class="btn btn-outline-danger shadow-none">ออกจากระบบ</a>
+            <a href="login.php" class="btn btn-outline-dark shadow-none me-2">เข้าสู่ระบบ</a>
+
+            <a href="signin.php" class="btn btn-outline-dark shadow-none">สมัครบัญชี</a>
         </div>
     </div>
     </nav>
@@ -116,7 +107,7 @@ if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
             <div class="row">
                 <div class="col-lg-8 bg-white shadow shadow p-4 rounded">
                 <h5 class="mb-4">ค้นหาห้องพัก</h5>
-                    <form name="formsearch" action="searchroomcus.php" method="post">
+                    <form name="formsearch" action="searchroom.php" method="post">
                         <div class="row align-items-end">
                             <div class="col-lg-3 mb-3">
                                 <label class="form-label">เช็คอิน</label>
@@ -144,6 +135,7 @@ if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                 </div>
             </div>
     </div>
+    <br>
     <div class="container mt-4">
         <div class="d-inline-block">
         <h1>HouseBoat</h1>
