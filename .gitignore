@@ -1,0 +1,16 @@
+# Environment credentials
+.env
+
+# Uploads except .gitkeep
+uploads/receipts/*
+!uploads/receipts/.gitkeep
+uploads/rooms/*
+!uploads/rooms/.gitkeep
+uploads/ingredients/*
+!uploads/ingredients/.gitkeep
+
+# System & IDE files
+.DS_Store
+Thumbs.db
+*.log
+.vscode/

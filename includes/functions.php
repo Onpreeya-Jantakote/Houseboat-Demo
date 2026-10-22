@@ -83,7 +83,7 @@ function isAdminLoggedIn() {
  */
 function requireAdminLogin() {
     if (!isAdminLoggedIn()) {
-        header("Location: " . BASE_URL . "/auth/login/admin/loginadmin.php");
+        header("Location: " . BASE_URL . "/admin/login.php");
         exit();
     }
 }

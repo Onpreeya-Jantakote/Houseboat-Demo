@@ -1,191 +1,130 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>House boat</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
-    rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
-    <style>
-        *{
-            font-family: 'Kanit', sans-serif;
-        }
-        .custom-bg{
-            background-color: #1a237e;
-        }
-        .custom-bg:hover{
-            background-color: #111755;
-        }
-        .availability-form{
-            margin-top: -50px ;
-            z-index: 2;
-            position: relative;
-            text-align: center
-        }
-        @media screen and (max-width: 575px) {
-            .availability-form{
-                margin-top: 25px;
-                padding: 0 35px;
-            }
-        }
-        .map-container{
-            overflow:hidden;
-            padding-bottom:56.25%;
-            position:relative;
-            height:0;
-            }
-            .map-container iframe{
-            left:0;
-            top:0;
-            height:100%;
-            width:100%;
-            position:absolute;
-            }
-    </style>
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light bg-white px-lg-3 py-lg-2 shadow-sm sticky-top">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="index.php"><img src="imges/logo/logo.png" alt="logo" width="40"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item me-2">
-                <a class="nav-link active" href="index.php">หน้าหลัก</a>
-            </li>
-            <li class="nav-item me-2">
-                <a class="nav-link" href="rooms.php">ห้องพัก</a>
-            </li>
-            <li class="nav-item me-2">
-                <a class="nav-link" href="activity.php">กิจกรรม</a>
-            </li>
-            <li class="nav-item me-2">
-                <a class="nav-link" href="anonybooking.php">การจอง</a>
-            </li>
-        </ul>
-        <div class="d-flex">
-            <a href="login.php" class="btn btn-outline-dark shadow-none me-2">เข้าสู่ระบบ</a>
+<?php
+require_once __DIR__ . '/config/config.php';
+require_once __DIR__ . '/includes/functions.php';
 
-            <a href="signin.php" class="btn btn-outline-dark shadow-none">สมัครบัญชี</a>
+$pageTitle = "หน้าหลัก - พักผ่อนท่ามกลางธรรมชาติสายน้ำ";
+$today = date('Y-m-d');
+$tomorrow = date('Y-m-d', strtotime('+1 day'));
+
+require_once __DIR__ . '/includes/header.php';
+?>
+
+<!-- Cover Carousel -->
+<div class="container-fluid px-lg-4 mt-3">
+    <div class="swiper swiper-container rounded-3 shadow-sm overflow-hidden" style="max-height: 520px;">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="<?= BASE_URL ?>/images/cover/1.jpg" class="w-100 d-block" style="height: 520px; object-fit: cover;"/></div>
+            <div class="swiper-slide"><img src="<?= BASE_URL ?>/images/cover/2.jpg" class="w-100 d-block" style="height: 520px; object-fit: cover;"/></div>
+            <div class="swiper-slide"><img src="<?= BASE_URL ?>/images/cover/3.jpg" class="w-100 d-block" style="height: 520px; object-fit: cover;"/></div>
+            <div class="swiper-slide"><img src="<?= BASE_URL ?>/images/cover/4.jpg" class="w-100 d-block" style="height: 520px; object-fit: cover;"/></div>
+            <div class="swiper-slide"><img src="<?= BASE_URL ?>/images/cover/5.jpg" class="w-100 d-block" style="height: 520px; object-fit: cover;"/></div>
+            <div class="swiper-slide"><img src="<?= BASE_URL ?>/images/cover/6.jpg" class="w-100 d-block" style="height: 520px; object-fit: cover;"/></div>
         </div>
     </div>
-    </nav>
+</div>
 
-    <!-- Cover -->
-    <div class="container-fluid px-lg-4 mt-4">
-        <div class="swiper swiper-container">
-            <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                <img src="imges/cover/1.jpg" class="w-100 d-block"/>
-            </div>
-            <div class="swiper-slide">
-                <img src="imges/cover/2.jpg" class="w-100 d-block"/>
-            </div>
-            <div class="swiper-slide">
-                <img src="imges/cover/3.jpg" class="w-100 d-block"/>
-            </div>
-            <div class="swiper-slide">
-                <img src="imges/cover/4.jpg" class="w-100 d-block"/>
-            </div>
-            <div class="swiper-slide">
-                <img src="imges/cover/5.jpg" class="w-100 d-block"/>
-            </div>
-            <div class="swiper-slide">
-                <img src="imges/cover/6.jpg" class="w-100 d-block"/>
-            </div>
+<!-- Check Availability Form -->
+<div class="container availability-form mx-auto">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 bg-white shadow p-4 rounded-3 border">
+            <h5 class="mb-3 fw-bold" style="color: #1a237e;"><i class="fa-solid fa-magnifying-glass me-2"></i> ค้นหาห้องพักว่าง</h5>
+            <form action="<?= BASE_URL ?>/rooms.php" method="GET">
+                <div class="row align-items-end g-3">
+                    <div class="col-md-3">
+                        <label class="form-label fw-semibold" for="check_in">วันที่เช็คอิน</label>
+                        <input type="date" class="form-control shadow-none" name="check_in" id="check_in" min="<?= $today ?>" value="<?= $today ?>" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label fw-semibold" for="check_out">วันที่เช็คเอาท์</label>
+                        <input type="date" class="form-control shadow-none" name="check_out" id="check_out" min="<?= $tomorrow ?>" value="<?= $tomorrow ?>" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label fw-semibold" for="amount">จำนวนผู้เข้าพัก</label>
+                        <select class="form-select shadow-none" name="amount" id="amount">
+                            <option value="1">1 ท่าน</option>
+                            <option value="2" selected>2 ท่าน</option>
+                            <option value="3">3 ท่าน</option>
+                            <option value="4">4 ท่าน</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn text-white w-100 shadow-none custom-bg py-2">
+                            <i class="fa-solid fa-search me-1"></i> ค้นหาห้องพัก
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
+</div>
 
-    <!-- check availability form -->
-
-    <div class="container availability-form mx-auto">
-            <div class="row">
-                <div class="col-lg-8 bg-white shadow shadow p-4 rounded">
-                <h5 class="mb-4">ค้นหาห้องพัก</h5>
-                    <form name="formsearch" action="searchroom.php" method="post">
-                        <div class="row align-items-end">
-                            <div class="col-lg-3 mb-3">
-                                <label class="form-label">เช็คอิน</label>
-                                <input type="date" class="form-control shadow-none" name="check_in" id="check_in" min="<?php echo date('Y-m-d'); ?>">
-                            </div>
-                            <div class="col-lg-3 mb-3">
-                                <label class="form-label">เช็คเอ้าท์</label>
-                                <input type="date" class="form-control shadow-none" name="check_out" id="check_out" min="<?php echo date('Y-m-d', strtotime('+1 day')); ?>">
-                            </div>
-                            
-                            <div class="col-lg-3 mb-3">
-                                <label class="form-label">จํานวนคน</label>
-                                <select class="form-select shadow-none " name="amount" value="<?php echo $amount; ?>">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-1 mb-lg-3 mt-2">
-                                <button type="submit" class="btn text-white shadow-none custom-bg">ค้นหา</button>
-                            </div>
-                        </div>
-                    </form>
+<!-- About Section -->
+<div class="container mt-5 pt-3">
+    <div class="row align-items-center mb-5">
+        <div class="col-lg-6">
+            <h2 class="fw-bold mb-3" style="color: #1a237e;">ยินดีต้อนรับสู่ House boat</h2>
+            <p class="text-muted leading-relaxed">
+                สัมผัสประสบการณ์การพักผ่อนบนแพพักลอยน้ำท่ามกลางธรรมชาติอันเงียบสงบ หลีกหนีความวุ่นวายมาสูดอากาศบริสุทธิ์ริมผืนน้ำใส 
+                พร้อมสิ่งอำนวยความสะดวกครบครัน กิจกรรมสนุกสนานทางน้ำ และบริการเซ็ตอาหารหมูกระทะยามเย็นสุดฟิน
+            </p>
+            <div class="d-flex gap-2 mt-4">
+                <a href="<?= BASE_URL ?>/rooms.php" class="btn btn-primary custom-bg shadow-none px-4 py-2">ดูห้องพักทั้งหมด</a>
+                <a href="<?= BASE_URL ?>/activity.php" class="btn btn-outline-secondary shadow-none px-4 py-2">ดูกิจกรรม</a>
+            </div>
+        </div>
+        <div class="col-lg-6 mt-4 mt-lg-0">
+            <div class="row g-2">
+                <div class="col-6">
+                    <img src="<?= BASE_URL ?>/images/rooms/A1.jpg" class="img-fluid rounded shadow-sm w-100" style="height: 180px; object-fit: cover;" alt="room">
+                </div>
+                <div class="col-6">
+                    <img src="<?= BASE_URL ?>/images/rooms/A0.jpg" class="img-fluid rounded shadow-sm w-100" style="height: 180px; object-fit: cover;" alt="room">
+                </div>
+                <div class="col-12">
+                    <img src="<?= BASE_URL ?>/images/cover/3.jpg" class="img-fluid rounded shadow-sm w-100" style="height: 180px; object-fit: cover;" alt="scenery">
                 </div>
             </div>
-    </div>
-    <br>
-    <div class="container mt-4">
-        <div class="d-inline-block">
-        <h1>HouseBoat</h1>
-        <img src="https://lh3.googleusercontent.com/p/AF1QipPqoUcCmCj0PTCqaQh-khU3hg-2RtSCFIL9CyCe=s1360-w1360-h1020" class="float-start rounded mt-4 me-5" height="250">
-        <img src="https://www.rattanacholhotel.com/wp-content/uploads/2022/03/extra-sha-plusLOGO-SHA-EXTRA-PLUS-3.jpg" class="mx-auto rounded mt-4 me-5" height="250">
-        <img src="https://lh3.googleusercontent.com/p/AF1QipPw1P06w_uDxRLv0p8Td1J31cSb1piagsE-kBMo=s1360-w1360-h1020" class="float-end rounded mt-4 " height="250">
-        <h1 class="mt-4">MAP</h1>
-        <div id="map-container-google-1" class="z-depth-1-half map-container mt-4" style="height: 500px">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15760.26319552153!2d98.631874!3d9.057763!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30512d1171885e57%3A0xe1464a0720e523c4!2s500Rai%20Floating%20Resort!5e0!3m2!1sen!2sth!4v1708417721866!5m2!1sen!2sth" frameborder="0"
-            style="border:0" allowfullscreen></iframe>
         </div>
     </div>
-        <br>
-    </div>
-    <br>
-   <div class="container p-5 my-5 border">
-    <div class="row">
-        <h2><center>ข้อมูลเพิ่มเติม</center></h2>
-          <div class="col-sm-4 mt-4">
-          <i class="fa-brands fa-pagelines"><h3>ธรรมชาติ</h3></i>
-            <p>หลีกหนีความวุ่นวายจากโลกภายนอก ให้ธรรมชาติได้บำบัด พื้นที่สีเขียว</p>
-          </div>
-          <div class="col-sm-4  mt-4">
-          <i class="fa-solid fa-camera-retro"><h3>จุดไฮไลท์</h3></i>
-            <p>จุดไฮไลท์ไม่ได้มีแค่สายน้ำเรือนแพ ยังมีความอร่อยให้เลือกอีกมากมาย มีหลายโซนไว้บริการลูกค้า โชนล่องแพ โซนคาเฟ่ และร้านอาหาร</p>
-          </div>
-          <div class="col-sm-4  mt-4">
-          <i class="fa-solid fa-headset"><h3>ติดต่อเรา</h3></i>        
-            <p>สามารถติดต่อเราผ่านช่องทาง</p>
-            <p>Facebook , Line, Email</p>
-          </div>
+
+    <!-- Features / Highlights -->
+    <div class="p-4 p-md-5 my-5 bg-white border rounded-3 shadow-sm">
+        <h3 class="text-center fw-bold mb-4" style="color: #1a237e;">จุดเด่นและบริการของเรา</h3>
+        <div class="row text-center g-4">
+            <div class="col-md-4">
+                <div class="p-3">
+                    <div class="fs-1 text-success mb-3"><i class="fa-solid fa-leaf"></i></div>
+                    <h5 class="fw-bold">ธรรมชาติบำบัด</h5>
+                    <p class="text-muted">หลีกหนีความวุ่นวายจากโลกภายนอก ให้ธรรมชาติและสายน้ำได้บำบัด พร้อมพื้นที่สีเขียวสบายตา</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3">
+                    <div class="fs-1 text-primary mb-3"><i class="fa-solid fa-camera-retro"></i></div>
+                    <h5 class="fw-bold">ไฮไลท์และอาหารรสเลิศ</h5>
+                    <p class="text-muted">มุมถ่ายรูปสวยงามหลายโซน พร้อมบริการชุดหมูกระทะริมน้ำ วัตถุดิบสดใหม่ ให้คุณอิ่มอร่อยอย่างจุใจ</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-3">
+                    <div class="fs-1 text-warning mb-3"><i class="fa-solid fa-headset"></i></div>
+                    <h5 class="fw-bold">บริการเป็นกันเอง</h5>
+                    <p class="text-muted">ดูแลลูกค้าอย่างอบอุ่น ติดต่อสอบถามได้ง่ายดายทั้งทาง Facebook, Line และโทรศัพท์</p>
+                </div>
+            </div>
         </div>
-      </div>
-      
-      
+    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script>
-    var swiper = new Swiper(".swiper-container", {
-      spaceBetween: 30,
-      effect: "fade",
-      loop: true,
-      autoplay: {
-        deplay: 3500,
-        disableOnInteraction: false,
-      }
-    });
-  </script>
+    <!-- Map Section -->
+    <div class="my-5">
+        <h3 class="fw-bold mb-3" style="color: #1a237e;"><i class="fa-solid fa-map-location-dot me-2"></i> แผนที่และการเดินทาง</h3>
+        <div class="rounded-3 shadow-sm overflow-hidden border">
+            <div class="map-container" style="height: 420px; padding-bottom: 0;">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15760.26319552153!2d98.631874!3d9.057763!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30512d1171885e57%3A0xe1464a0720e523c4!2s500Rai%20Floating%20Resort!5e0!3m2!1sen!2sth!4v1708417721866!5m2!1sen!2sth" 
+                    width="100%" height="420" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
 
-
-</body>
-</html>
+<?php require_once __DIR__ . '/includes/footer.php'; ?>
